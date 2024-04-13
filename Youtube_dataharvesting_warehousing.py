@@ -477,13 +477,13 @@ def create_table_fun(select_table):
 
     if select_table=="CHANNEL":
         try:
-            create_query='''create table if not exists youtube.channel(channel_id varchar(255) not null,
-                                                            channel_name varchar(255),
-                                                            channel_type varchar(255),
-                                                            channel_views int,
-                                                            channel_description text,
-                                                            channel_status varchar(255),
-                                                            primary key(channel_id))'''
+            create_query='''create table youtube.channel(channel_id varchar(255) not null,
+                                                        channel_name varchar(255),
+                                                        channel_type varchar(255),
+                                                        channel_views int,
+                                                        channel_description text,
+                                                        channel_status varchar(255),
+                                                        primary key(channel_id))'''
             cursor.execute(create_query)
             # print("Table Created")
             conn.commit()
@@ -494,11 +494,11 @@ def create_table_fun(select_table):
 
     if select_table=="PLAYLIST":
         try:
-            create_query='''create table if not exists youtube.playlist(playlist_id varchar(255),
-                                                            channel_id varchar(255),
-                                                            playlist_name varchar(255),
-                                                            primary key(playlist_id),
-                                                            foreign key (channel_id) REFERENCES channel(channel_id))'''
+            create_query='''create table youtube.playlist(playlist_id varchar(255),
+                                                        channel_id varchar(255),
+                                                        playlist_name varchar(255),
+                                                        primary key(playlist_id),
+                                                        foreign key (channel_id) REFERENCES channel(channel_id))'''
             cursor.execute(create_query)
             conn.commit()
             st.write("PLAYLIST Table created sucessfully")
@@ -509,22 +509,22 @@ def create_table_fun(select_table):
     
     if select_table=="VIDEO":
         try:
-            create_query='''create table if not exists youtube.video(video_id varchar(255),
-                                                            playlist_id varchar(255),
-                                                            video_name varchar(255),
-                                                            video_description text,
-                                                            channel_name varchar(255),
-                                                            published_date datetime,
-                                                            view_count int,
-                                                            like_count int,
-                                                            dislike_count int,
-                                                            favorite_count int,
-                                                            comment_count int,
-                                                            duration int,
-                                                            thumbnail varchar(255),
-                                                            caption_status varchar(255),
-                                                            primary key(video_id),
-                                                            foreign key (playlist_id) REFERENCES playlist(playlist_id))'''
+            create_query='''create table youtube.video(video_id varchar(255),
+                                                        playlist_id varchar(255),
+                                                        video_name varchar(255),
+                                                        video_description text,
+                                                        channel_name varchar(255),
+                                                        published_date datetime,
+                                                        view_count int,
+                                                        like_count int,
+                                                        dislike_count int,
+                                                        favorite_count int,
+                                                        comment_count int,
+                                                        duration int,
+                                                        thumbnail varchar(255),
+                                                        caption_status varchar(255),
+                                                        primary key(video_id),
+                                                        foreign key (playlist_id) REFERENCES playlist(playlist_id))'''
             cursor.execute(create_query)
             conn.commit()
             st.write("VIDEO Table created sucessfully")
@@ -535,13 +535,13 @@ def create_table_fun(select_table):
     
     if select_table=="COMMENT":
         try:
-            create_query='''create table if not exists youtube.comment(comment_id varchar(255),
-                                                            video_id varchar(255),
-                                                            comment_text text,
-                                                            comment_author varchar(255),
-                                                            comment_published_date datetime,
-                                                            primary key(comment_id),
-                                                            foreign key (video_id) REFERENCES video(video_id))'''
+            create_query='''create table youtube.comment(comment_id varchar(255),
+                                                        video_id varchar(255),
+                                                        comment_text text,
+                                                        comment_author varchar(255),
+                                                        comment_published_date datetime,
+                                                        primary key(comment_id),
+                                                        foreign key (video_id) REFERENCES video(video_id))'''
             cursor.execute(create_query)
             conn.commit()
             st.write("COMMENT Table created sucessfully")
